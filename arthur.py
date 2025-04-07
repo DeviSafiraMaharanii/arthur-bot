@@ -393,3 +393,19 @@ async def main():
 
 if __name__ == "__main__":
     asyncio.run(main())
+
+# Tambahan agar Railway tetap aktif via UptimeRobot
+from flask import Flask
+import threading
+
+app = Flask(_name_)
+
+@app.route('/')
+def home():
+    return "Arthur Bot is alive!"
+
+def keep_alive():
+    app.run(host="0.0.0.0", port=8000)
+
+# Jalankan Flask server di thread terpisah
+threading.Thread(target=keep_alive).start()
